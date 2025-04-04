@@ -110,6 +110,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
+    "@types/better-sqlite3": "^7.6.12",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.11",
@@ -180,7 +181,8 @@
     "files": [
       "dist",
       "node_modules",
-      "package.json"
+      "package.json",
+      "db"
     ],
     "mac": {
       "sign": ".erb/scripts/notarize.js",

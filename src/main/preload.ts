@@ -26,4 +26,15 @@ const electronHandler = {
 
 contextBridge.exposeInMainWorld('electron', electronHandler);
 
+contextBridge.exposeInMainWorld('api', {
+  countAllItems: () => ipcRenderer.invoke('db:countAllItems'),
+  getAllItems: () => ipcRenderer.invoke('db:getAllItems'),
+  getItemById: (id: string) => ipcRenderer.invoke('db:getItemById', id),
+  countAllCategories: () => ipcRenderer.invoke('db:countAllCategories'),
+  getAllCategories: () => ipcRenderer.invoke('db:getAllCategories'),
+  getCategoryById: (id: string) => ipcRenderer.invoke('db:getCategoryById', id),
+  countCategoryItems: (id: string) => ipcRenderer.invoke('db:countCategoryItems', id),
+  getCategoryItems: (id: string) => ipcRenderer.invoke('db:getCategoryItems', id),
+});
+
 export type ElectronHandler = typeof electronHandler;
