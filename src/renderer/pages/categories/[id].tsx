@@ -54,8 +54,6 @@ export default function CategoryDetail() {
 
       <h1 className="text-2xl font-bold">{category.id}</h1>
 
-      {console.log(categoryItems)}
-
       {categoryItems ? (
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {categoryItems.map((item: any) => (
