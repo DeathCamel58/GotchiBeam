@@ -10,9 +10,10 @@ const dbPath = isDevelopment
 const db = new Database(dbPath);
 
 export function countAllItems() {
-  const query = db.prepare('SELECT COUNT(*) FROM item').all();
-  const count = query[0]["COUNT(*)"];
-  return count;
+  const query = db.prepare('SELECT COUNT(*) FROM item').all() as {
+    'COUNT(*)': number;
+  }[];
+  return query[0]['COUNT(*)'];
 }
 
 export function getAllItems() {
@@ -20,9 +21,10 @@ export function getAllItems() {
 }
 
 export function countAllCategories() {
-  const query = db.prepare('SELECT COUNT(*) FROM category').all();
-  const count = query[0]["COUNT(*)"];
-  return count;
+  const query = db.prepare('SELECT COUNT(*) FROM category').all() as {
+    'COUNT(*)': number;
+  }[];
+  return query[0]['COUNT(*)'];
 }
 
 export function getAllCategories() {
@@ -38,9 +40,13 @@ export function getCategoryById(id: string) {
 }
 
 export function countCategoryItems(id: string) {
-  return db.prepare('SELECT COUNT(*) FROM category_item WHERE category_id = ?').get(id);
+  return db
+    .prepare('SELECT COUNT(*) FROM category_item WHERE category_id = ?')
+    .get(id);
 }
 
 export function getCategoryItems(id: string) {
-  return db.prepare('SELECT * FROM category_item WHERE category_id = ?').all(id);
+  return db
+    .prepare('SELECT * FROM category_item WHERE category_id = ?')
+    .all(id);
 }
