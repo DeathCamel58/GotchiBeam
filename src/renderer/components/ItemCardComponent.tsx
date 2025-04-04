@@ -8,7 +8,7 @@ type Item = {
   image: Uint8Array; // or Buffer
 };
 
-export default function ItemCard({ item }: { item: Item }) {
+export default function ItemCardComponent({ item }: { item: Item }) {
   const imageUrl = item.image ? uint8ArrayToDataUrl(item.image) : '';
 
   return (

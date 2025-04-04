@@ -1,6 +1,6 @@
 import { useNfcReader } from "@/contexts/NfcReaderContext";
 
-export default function ConnectDisconnectButton() {
+export default function ConnectDisconnectButtonComponent() {
   const { status, connect, disconnect } = useNfcReader();
 
   const toggleConnection = () => {

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { version } from '../../../release/app/package.json';
 import { NfcReaderProvider } from '@/contexts/NfcReaderContext';
-import ReaderStatus from '@/components/ReaderStatus';
+import ReaderStatusComponent from '@/components/ReaderStatusComponent';
 import { Link } from 'react-router-dom';
 
 type MainLayoutProps = {
@@ -15,7 +15,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <header className="w-full py-4 bg-gray-800 text-center text-xl font-bold flex justify-between items-center px-4">
           <span><Link to="/">GotchiBeam</Link></span>
           <div className="flex items-center space-x-4">
-            <ReaderStatus />
+            <ReaderStatusComponent />
           </div>
         </header>
         <main className="flex-1 w-full max-w-3xl p-4">{children}</main>

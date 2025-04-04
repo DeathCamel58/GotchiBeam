@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import uint8ArrayToDataUrl from '@/utils/image';
+import { Item } from '@/types/Item';
 
 export default function ItemDetail() {
   const { id } = useParams();
-  const [item, setItem] = useState<any>(null);
-  const [imageUrl, setImageUrl] = useState<any>(null);
+  const [item, setItem] = useState<Item | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  if (!id) return (
+    <MainLayout>
+      <h2>Missing Item ID!</h2>
+      <Link to="/items">Item List</Link>
+    </MainLayout>
+  )
 
   useEffect(() => {
     window.api.getItemById(id).then(setItem);

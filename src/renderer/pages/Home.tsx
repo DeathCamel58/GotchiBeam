@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [countItems, setCountItems] = useState([]);
-  const [countCategories, setCountCategories] = useState([]);
+  const [countItems, setCountItems] = useState<number | null>(null);
+  const [countCategories, setCountCategories] = useState<number | null>(null);
 
   useEffect(() => {
     window.api.countAllItems().then(setCountItems);

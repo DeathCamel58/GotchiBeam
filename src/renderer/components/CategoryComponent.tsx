@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom';
 import uint8ArrayToDataUrl from '@/utils/image';
+import { CategoryItem } from '@/types/CategoryItem';
 
-type CategoryItem = {
-  id: string;
-  image: Uint8Array; // or Buffer
-};
-
-export default function Category({ category }: { category: CategoryItem }) {
+export default function CategoryComponent({ category }: { category: CategoryItem }) {
   const imageUrl = category.image ? uint8ArrayToDataUrl(category.image) : '';
 
   return (

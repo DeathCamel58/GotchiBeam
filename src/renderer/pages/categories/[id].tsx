@@ -1,14 +1,24 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
-import ItemCard from '@/components/ItemCard';
+import ItemCardComponent from '@/components/ItemCardComponent';
 import uint8ArrayToDataUrl from '@/utils/image';
+import { Category } from '@/types/Category';
+import { CategoryItem } from '@/types/CategoryItem';
+import { Item } from '@/types/Item';
 
 export default function CategoryDetail() {
   const { id } = useParams();
-  const [category, setCategory] = useState<any>(null);
-  const [categoryItems, setCategoryItems] = useState<any>(null);
-  const [imageUrl, setImageUrl] = useState<any>(null);
+  const [category, setCategory] = useState<Category | null>(null);
+  const [categoryItems, setCategoryItems] = useState<CategoryItem[] | Item[]>([]);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  if (!id) return (
+    <MainLayout>
+      <h2>Missing Category ID!</h2>
+      <Link to="/categories">Category List</Link>
+    </MainLayout>
+  )
 
   useEffect(() => {
     window.api.getCategoryById(id).then(setCategory);
@@ -16,15 +26,19 @@ export default function CategoryDetail() {
 
   useEffect(() => {
     async function fetchCategoryItems() {
+      if (!id) return; // id type guard to quiet error from typescript
+
       const rawCategoryItems = await window.api.getCategoryItems(id);
 
-      const fullItems = await Promise.all(
+      let fullItems = await Promise.all(
         rawCategoryItems.map((categoryItem: any) =>
           window.api.getItemById(categoryItem.item_id)
         )
       );
 
-      setCategoryItems(fullItems);
+      const validItems = fullItems.filter((item): item is Item => item !== null);
+
+      setCategoryItems(validItems);
     }
 
     fetchCategoryItems();
@@ -54,7 +68,7 @@ export default function CategoryDetail() {
         <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
           {categoryItems.map((item: any) => (
             <div key={item.id} className="break-inside-avoid">
-              <ItemCard item={item} />
+              <ItemCardComponent item={item} />
             </div>
           ))}
         </div>

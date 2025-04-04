@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNfcReader } from '@/contexts/NfcReaderContext';
-import ConnectDisconnectButton from '@/components/ConnectDisconnectButton'; // Import ConnectDisconnectButton
+import ConnectDisconnectButtonComponent from '@/components/ConnectDisconnectButtonComponent'; // Import ConnectDisconnectButton
 
-export default function ReaderStatus() {
+export default function ReaderStatusComponent() {
   const { status, logs } = useNfcReader();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown state
 
@@ -37,7 +37,7 @@ export default function ReaderStatus() {
       {isDropdownOpen && (
         <div className="absolute top-full right-0 mt-2 bg-gray-800 text-white rounded-lg shadow-lg w-48 p-4">
           {/* Connect/Disconnect Button */}
-          <ConnectDisconnectButton />
+          <ConnectDisconnectButtonComponent />
 
           {/* Log History */}
           <div className="mt-4">
