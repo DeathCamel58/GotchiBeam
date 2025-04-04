@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import uint8ArrayToDataUrl from '@/utils/image';
 
 type CategoryItem = {
-  id: number;
+  id: string;
   image: Uint8Array; // or Buffer
 };
 
