@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
-
-function uint8ArrayToDataUrl(bytes: Uint8Array): string {
-  const blob = new Blob([bytes], { type: 'image/png' }); // adjust if image is jpeg etc
-  return URL.createObjectURL(blob);
-}
+import uint8ArrayToDataUrl from '@/utils/image';
 
 export default function ItemDetail() {
   const { id } = useParams();

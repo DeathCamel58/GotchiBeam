@@ -1,15 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import uint8ArrayToDataUrl from '@/utils/image';
 
 type CategoryItem = {
   id: number;
   image: Uint8Array; // or Buffer
 };
-
-function uint8ArrayToDataUrl(bytes: Uint8Array): string {
-  const blob = new Blob([bytes], { type: 'image/png' }); // adjust if image is jpeg etc
-  return URL.createObjectURL(blob);
-}
 
 export default function Category({ category }: { category: CategoryItem }) {
   const imageUrl = category.image ? uint8ArrayToDataUrl(category.image) : '';
@@ -28,7 +23,6 @@ export default function Category({ category }: { category: CategoryItem }) {
           <p className="text-gray-500 text-sm">ID: {category.id}</p>
           {/* TODO: Look up the number of items in a category */}
           {/* TODO: Maybe display a carousel of items in the category? */}
-          {/*<p className="text-gray-500 text-xs wrap-anywhere">Data: {JSON.stringify(category)}</p>*/}
         </div>
       </div>
     </Link>
